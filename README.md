@@ -34,7 +34,7 @@ matplotlib<br>
 
 # Additional Comments and hints
 * "PV-ALONE SAVINGS": This setting is found under Configuration/PV and is used to separate the PV generated savings from
-* the hydrogen production cycle, for example when a PV installation already exists and only the H2 production, storage and return 
-* need additional investments. In this case, set "PV-alone savings" to zero and uncheck all modules but PV under Configuration/General.
-* Now run the simulation and note the yearly savings under the "Summary" tab (Costs). Fill in this value under "PV-alone savings", which
-* will subtract this value from the generated savings when more modules are included.
+the hydrogen production cycle, for example when a PV installation already exists and only the H2 production, storage and return 
+need additional investments. In this case, set "PV-alone savings" to zero and uncheck all modules but PV under Configuration/General.
+Now run the simulation and note the yearly savings under the "Summary" tab (Costs). Fill in this value under "PV-alone savings", which
+will subtract this value from the generated savings when more modules are included.
