@@ -7,7 +7,7 @@ This is a python tkinter program, which simulates the operation of an electricit
 When no solar power is available, H2 is drawn from the tank and fed to a fuel cell, which produces electricity according to the current consumption. Surpluses and shortages in supply and demand are exchanged with the grid at current price rates.
 All of the components involved, i.e. PV system, battery, electrolyzer(s), H2 storage, and fuel cell can individually be included or excluded in the simulation and all their parameters adapted at will and conveniently in a graphical user interface (GUI). As a result, the simulation produces live graphics which show the relevant data at each time interval or in daily samples for a maximum period of one year. A summary is also generated, which determines the productivity and generated savings of the system and the investment costs are estimated based on recently obtained quotations (See Parameters). From this data, a return-on-investment is calculated, which can be optimized by execution of an included algorithm that optimally matches the components to each other and maximizes yearly savings.
 
-#Installation
+# Installation
 Below is a list of python modules necessary to run the program:
 numpy
 datetime
@@ -19,7 +19,7 @@ pandas
 threading
 matplotlib
 
-#Usage
+# Usage
 *Obtain insolation data from the web: 
   NREL NSRDB data viewer. Link: https://maps.nrel.gov/nsrdb-viewer (26.10.2021). Choose METEOSAT PSM v3, or similar for Europe. Click “Download Data” and select ‘point data download’. Then fill in credentials and pick desired data columns DNI & GHI, time span and interval from the respective model’s tab. Download data and open with spreadsheet manipulator. Make a column where DNI and GHI are added together and fill in the column numbers into the simulation configuration (A=col 1, B = col 2, etc.).Save file without header (numbers starting from first row) as csv. Fill in the filename in configuration.
 
@@ -29,6 +29,7 @@ matplotlib
 
 *(OPTIONAL) Configure Optimization parameters under Configuration/Optimize
 
+# Additional Comments and hints
 * "PV-ALONE SAVINGS": This setting is found under Configuration/PV and is used to separate the PV generated savings from
 * the hydrogen production cycle, for example when a PV installation already exists and only the H2 production, storage and return 
 * need additional investments. In this case, set "PV-alone savings" to zero and uncheck all modules but PV under Configuration/General.
