@@ -9,7 +9,7 @@ All of the components involved, i.e. PV system, battery, electrolyzer(s), H2 sto
 
 # Installation
 Below is a list of python modules necessary to run the program:
-numpy
+numpy <br>
 datetime
 calendar
 random
