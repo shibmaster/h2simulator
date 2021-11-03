@@ -21,7 +21,7 @@ matplotlib<br>
 
 # Usage
 *Obtain insolation data from the web: 
-  NREL NSRDB data viewer. Link: https://maps.nrel.gov/nsrdb-viewer (26.10.2021). Choose METEOSAT PSM v3, or similar for Europe. Click “Download Data” and select ‘point data download’. Then fill in credentials and pick desired data columns DNI & GHI, time span and interval from the respective model’s tab. Download data and open with spreadsheet manipulator. Make a column where DNI and GHI are added together and fill in the column numbers into the simulation configuration (A=col 1, B = col 2, etc.).Save file without header (numbers starting from first row) as csv. Fill in the filename in configuration.<br><br>
+  NREL NSRDB data viewer. Link: https://maps.nrel.gov/nsrdb-viewer (26.10.2021). Choose METEOSAT PSM v3, or similar for Europe. Click “Download Data” and select ‘point data download’. Then fill in credentials and pick desired data columns DNI & GHI, time span and interval from the respective model’s tab. Download data and open with spreadsheet manipulator. Make a column where DNI and GHI are added together and fill in the column numbers into the simulation configuration (A=col 1, B = col 2, etc.).Save file without header (numbers starting from first row) as csv. Fill in the filename in configuration/solar input.<br><br>
 
 *Configure the components to be included in the simulated installtion under Configuration/General<br><br>
 
