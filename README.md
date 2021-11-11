@@ -38,3 +38,5 @@ the hydrogen production cycle, for example when a PV installation already exists
 need additional investments. In this case, set "PV-alone savings" to zero and uncheck all modules but PV under Configuration/General.
 Now run the simulation and note the yearly savings under the "Summary" tab (Costs). Fill in this value under "PV-alone savings", which
 will subtract this value from the generated savings when more modules are included.
+
+* When optimizing the photovoltaics (Configuration/Optimize/optimize pv: y), it is best to set the revenue per kWh sold to zero under Configuration/Sinks, such that the required area will be optimized to the other components.
