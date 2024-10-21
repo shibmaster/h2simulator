@@ -1384,137 +1384,135 @@ runbutton = Button(root, text="Run", command=run)
 runbutton.grid(row=0,column=3)
 
 def optimize():
-    global sim,root,frame,confbutton,vrs,vframe
-    #forgetall()
-    frame.grid_forget()
-    vframe.grid_forget()
-    sframe.grid_forget()
-    cframe.grid_forget()
-    frame = LabelFrame(root, text='Optimization', padx=5, pady=5)
-    frame.grid(row=1,columnspan=5,padx=5,pady=5)
-    optibutton["state"]=DISABLED
-    confbutton["state"]=NORMAL
-    runbutton["state"]=NORMAL
-    helpbutton["state"]=NORMAL
-    
-    o1frame = LabelFrame(frame, text='Overall', padx=5, pady=5)
-    o2frame = LabelFrame(frame, text='Parameters', padx=5, pady=5)
-    o1frame.grid(row=1, columnspan=4)
-    o2frame.grid(row=2, columnspan=4)
-    
-    sim=Simulation()
-    per=float(sim.opti['Initial change step'])
-    gre=float(sim.opti['Planned ROI (%)'])
-    rou=float(sim.opti['Max optimization rounds'])
-    opv=sim.opti['Optimize PV? (y/n)']
-    ityp=sim.opti['change unit (absolute / percent)']
-    opt=Optimization(per,gre,rou,ityp)
-    if opv == 'n':
-        opt.module[4]=0
-    if ityp=='percent':
-        ityp2='%'
-    else:
-        ityp2='abs'
-    
-    def prints():
-        c,d=[],[]
+	global sim,root,frame,confbutton,vrs,vframe
+	#forgetall()
+	frame.grid_forget()
+	vframe.grid_forget()
+	sframe.grid_forget()
+	cframe.grid_forget()
+	frame = LabelFrame(root, text='Optimization', padx=5, pady=5)
+	frame.grid(row=1,columnspan=5,padx=5,pady=5)
+	optibutton["state"]=DISABLED
+	confbutton["state"]=NORMAL
+	runbutton["state"]=NORMAL
+	helpbutton["state"]=NORMAL
+	
+	o1frame = LabelFrame(frame, text='Overall', padx=5, pady=5)
+	o2frame = LabelFrame(frame, text='Parameters', padx=5, pady=5)
+	o1frame.grid(row=1, columnspan=4)
+	o2frame.grid(row=2, columnspan=4)
+	
+	sim=Simulation()
+	per=float(sim.opti['Initial change step'])
+	gre=float(sim.opti['Planned ROI (%)'])
+	rou=float(sim.opti['Max optimization rounds'])
+	opv=sim.opti['Optimize PV? (y/n)']
+	ityp=sim.opti['change unit (absolute / percent)']
+	opt=Optimization(per,gre,rou,ityp)
+	if opv == 'n':
+		opt.module[4]=0
+	if ityp=='percent':
+		ityp2='%'
+	else:
+		ityp2='abs'
+	
+	def prints():
+		c,d=[],[]
 #        c.append(Label(o1frame, text='Return of investment (years)'))
-        c.append(Label(o1frame, text='Return on investment (%)'))
-        d.append(Label(o1frame, text='  {0:2.1f}  '.format(opt.oldre)))
-        c.append(Label(o1frame, text='Annual savings (Eur)'))
-        d.append(Label(o1frame, text='  {0:2.0f}  '.format(opt.sim.sum['Total savings (Eur)'])))
-        c.append(Label(o1frame, text='Current varation step ({})'.format(ityp2)))
-        d.append(Label(o1frame, text='  {0:2.0f}  '.format((opt.percent))))
-        c.append(Label(o1frame, text='Current round'))
-        d.append(Label(o1frame, text='  {}/{}  '.format(opt.rnd,int(opt.rounds))))
-        for i in range(len(c)):
-            c[i].grid(row=i+1,column=1)
-            d[i].grid(row=i+1,column=2, padx=5)
-        
-    def printp():
-        c,d=[],[]
-        prnt=opt.printall()
-        i=0
-        for k,v, in prnt:
-            c.append(Label(o2frame, text=k))
-            d.append(Label(o2frame, text='  {0:2.1f}  '.format(v))) #round(v,1)))
-            if opt.module[i]==1:
-                c[i].grid(row=i+1,column=1)
-                d[i].grid(row=i+1,column=2, padx=5)
-            i+=1
-        
-        #Extract variables
-    re,sv=0,0
-    oldre,oldsv=opt.inre,opt.insv
-    goalre=opt.goalre
-    percent=opt.percent
+		c.append(Label(o1frame, text='Return on investment (%)'))
+		d.append(Label(o1frame, text='  {0:2.1f}  '.format(opt.oldre)))
+		c.append(Label(o1frame, text='Annual savings (Eur)'))
+		d.append(Label(o1frame, text='  {0:2.0f}  '.format(opt.sim.sum['Total savings (Eur)'])))
+		c.append(Label(o1frame, text='Current varation step ({})'.format(ityp2)))
+		d.append(Label(o1frame, text='  {0:2.0f}  '.format((opt.percent))))
+		c.append(Label(o1frame, text='Current round'))
+		d.append(Label(o1frame, text='  {}/{}  '.format(opt.rnd,int(opt.rounds))))
+		for i in range(len(c)):
+			c[i].grid(row=i+1,column=1)
+			d[i].grid(row=i+1,column=2, padx=5)
+		
+	def printp():
+		c,d=[],[]
+		prnt=opt.printall()
+		i=0
+		for k,v, in prnt:
+			c.append(Label(o2frame, text=k))
+			d.append(Label(o2frame, text='  {0:2.1f}  '.format(v))) #round(v,1)))
+			if opt.module[i]==1:
+				c[i].grid(row=i+1,column=1)
+				d[i].grid(row=i+1,column=2, padx=5)
+			i+=1
+		
+		#Extract variables
+	re,sv=0,0
+	oldre,oldsv=opt.inre,opt.insv
+	goalre=opt.goalre
+	percent=opt.percent
 
-    
-    prints()
-    printp()
-        
-    def start(con=0):
-        opt.rnd=0
-        opt.stp=1
-        re,sv=0,0
-        oldre,oldsv=opt.oldre,opt.oldsv
-        goalre=opt.goalre
-        percent=opt.percent
-        rnd=opt.rnd
-        while opt.rnd < rou and opt.stp==1:
-            opt.sim=Simulation()
-            n=random.randint(0,4) #len(last)-1)
-            while opt.module[n]==0:
-                n=random.randint(0,4) #len(last)-1) 
-            opt.rnd+=1
-            opt.vary(n)
-            m=n
-            while opt.module[n]==0 or n==m:
-                n=random.randint(0,4) #len(last)-1) 
-            opt.vary(n)
-            re,sv=opt.run()
-            #if (abs(re-oldre)<1 and sv/oldsv>1.05) or (re+.5 < oldre and (sv/oldsv)>.99) or (re <= goalre and sv>oldsv):
-            if (re>opt.oldre and re<goalre) or (re>goalre and sv>opt.oldsv):
-                opt.oldsv=sv
-                opt.oldre=re
-                opt.failcount=0
-    #            print('ROI:',int(oldre),', Savings:',int(oldsv),',',label[n],':',round(last[n],1),'->',round(current[n],1))
-                printp()
-                opt.last[n]=opt.current[n]
-            else:
-                opt.current[n]=opt.last[n]
-                opt.failcount+=1
-                #print('...',(re),int(sv),label[n],current[n])
-            if opt.failcount>np.sum(np.asarray(opt.module))*8:
-                opt.failcount=0
-                opt.percent=opt.percent/1.5
-                if opt.percent <1:
-                    stop()
-                #print(int(percent),'% change')
-            prints()
-        stop()
-    
-    def stop():
-        opt.stp=0
-        startbutton["state"]=NORMAL
-        stopbutton["state"]=DISABLED
-        runbutton["state"]=NORMAL
-        confbutton["state"]=NORMAL
-        helpbutton["state"]=NORMAL
-    def start_thread():
-        thread = threading.Thread(target=start)
-        thread.start()
-        startbutton["state"]=DISABLED
-        runbutton["state"]=DISABLED
-        confbutton["state"]=DISABLED
-        helpbutton["state"]=DISABLED
-        stopbutton["state"]=NORMAL
+	
+	prints()
+	printp()
+		
+	def start(con=0):
+		opt.rnd=0
+		opt.stp=1
+		re,sv=0,0
+		oldre,oldsv=opt.oldre,opt.oldsv
+		goalre=opt.goalre
+		percent=opt.percent
+		rnd=opt.rnd
+		while opt.rnd < rou and opt.stp==1:
+			opt.sim=Simulation()          
+			i=random.randint(0,sum(opt.module))
+			n=0
+			while  n < i : 
+				if opt.module[n]==0:
+					i+=1
+				n+=1
+			opt.rnd+=1
+			n-=1
+			opt.vary(n)
+			re,sv=opt.run()
+			if (re>opt.oldre and re<goalre) or (re>goalre and sv>opt.oldsv):
+				opt.oldsv=sv
+				opt.oldre=re
+				opt.failcount=0
+				printp()
+				opt.last[n]=opt.current[n]
+			else:
+				opt.current[n]=opt.last[n]
+				opt.failcount+=1
+				#print('...',(re),int(sv),label[n],current[n])
+			if opt.failcount>np.sum(np.asarray(opt.module))*8:
+				opt.failcount=0
+				opt.percent=opt.percent/1.5
+				if opt.percent <1:
+					stop()
+				#print(int(percent),'% change')
+			prints()
+		stop()
+	
+	def stop():
+		opt.stp=0
+		startbutton["state"]=NORMAL
+		stopbutton["state"]=DISABLED
+		runbutton["state"]=NORMAL
+		confbutton["state"]=NORMAL
+		helpbutton["state"]=NORMAL
+	def start_thread():
+		thread = threading.Thread(target=start)
+		thread.start()
+		startbutton["state"]=DISABLED
+		runbutton["state"]=DISABLED
+		confbutton["state"]=DISABLED
+		helpbutton["state"]=DISABLED
+		stopbutton["state"]=NORMAL
    
-    startbutton = Button(frame, text="Start", command=start_thread)
-    startbutton.grid(row=0,column=1)
-    stopbutton = Button(frame, text="stop", command=stop)
-    stopbutton.grid(row=0,column=2)
-    stopbutton["state"]=DISABLED
+	startbutton = Button(frame, text="Start", command=start_thread)
+	startbutton.grid(row=0,column=1)
+	stopbutton = Button(frame, text="stop", command=stop)
+	stopbutton.grid(row=0,column=2)
+	stopbutton["state"]=DISABLED
         
 optibutton = Button(root, text="Optimize", command=optimize)
 optibutton.grid(row=0,column=4)
